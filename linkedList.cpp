@@ -89,14 +89,4 @@ int main() {
     }
 
     return 0;
-}    cout << '\n';
-
-    Node* cur = head;
-    while (cur) {
-        Node* tmp = cur->next;
-        delete cur;
-        cur = tmp;
-    }
-
-    return 0;
-}
+}   
