@@ -1,39 +1,42 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <deque>
+
 using namespace std;
 
-// Struktur node untuk Doubly Linked List
-struct Node {
-    int val;       // menyimpan nilai node
-    Node* prev;    // pointer ke node sebelumnya
-    Node* next;    // pointer ke node berikutnya
-
-    // Constructor
-    Node(int v) : val(v), prev(NULL), next(NULL) {}
-};
-
 int main() {
+    // Mengoptimalkan input/output C++ agar berjalan super cepat
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-    int N;
-    string S;
+    int n;
+    string s;
+    cin >> n >> s;
 
-    // Input:
-    // N = jumlah node tambahan
-    // S = instruksi L atau R
-    cin >> N >> S;
+    deque<int> dq;
+    
+    // Masukkan angka terakhir (N) terlebih dahulu
+    dq.push_back(n);
 
-    // Awalnya linked list hanya berisi node N
-    Node* head = new Node(N);
-    Node* tail = head;
+    // Proses string dari belakang (dari indeks N-1 ke 0)
+    for (int i = n - 1; i >= 0; --i) {
+        if (s[i] == 'L') {
+            // Jika karakternya 'L', angka i ditaruh di sebelah KANAN
+            dq.push_back(i);
+        } else {
+            // Jika karakternya 'R', angka i ditaruh di sebelah KIRI
+            dq.push_front(i);
+        }
+    }
 
-    // Loop dari N-1 turun ke 0
-    for (int i = N - 1; i >= 0; i--) {
+    // Cetak hasil akhir
+    for (int i = 0; i <= n; ++i) {
+        cout << dq[i] << (i == n ? "" : " ");
+    }
+    cout << "\n";
 
-        // Membuat node baru
-        Node* newNode = new Node(i);
-
-        // Jika karakter = 'L'
-        // maka node baru ditaruh di kanan (tail)
-        if (S[i] == 'L') {
+    return 0;
+}
 
             // Sambungkan tail ke newNode
             tail->next = newNode;
